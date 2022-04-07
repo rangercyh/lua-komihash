@@ -1,0 +1,3 @@
+[submodule "komihash"]
+	path = komihash
+	url = https://github.com/avaneev/komihash.git
