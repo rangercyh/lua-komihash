@@ -3,7 +3,7 @@ local komihash = require("lkomihash")
 local M = {}
 
 function M.hash64(str, seed)
-    return komihash.hash64(str, seed or 0)
+    return komihash.hash64(str, seed)
 end
 
 -- return a uniformly-random generator

@@ -9,10 +9,9 @@ static char str_ret[str_len];
 
 static int
 lhash64(lua_State *L) {
-    const char *str = luaL_checkstring(L, 1);
-    size_t len = luaL_len(L, 1);
-    uint64_t use_seed = luaL_checkinteger(L, 2);
-    snprintf(str_ret, str_len, "%"PRIu64, komihash(str, len, use_seed));
+    size_t len;
+    const char *str = luaL_checklstring(L, 1, &len);
+    snprintf(str_ret, str_len, "%"PRIu64, komihash(str, len, luaL_optinteger(L, 2, 0)));
     lua_pushstring(L, str_ret);
     return 1;
 }
