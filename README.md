@@ -2,6 +2,8 @@
 
 lua warpper for [komihash](https://github.com/avaneev/komihash)
 
+according to [smhasher](https://github.com/rurban/smhasher) one of the fastest hash functions on x86_64 without quality problems.
+
 # use
 
 ```lua
