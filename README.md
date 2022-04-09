@@ -1,6 +1,6 @@
 # lua-komihash
 
-lua warpper for [komihash](https://github.com/avaneev/komihash)
+lua wrapper for [komihash](https://github.com/avaneev/komihash)
 
 according to [smhasher](https://github.com/rurban/smhasher), komihash is one of the fastest hash functions on x86_64 without quality problems.
 
@@ -26,12 +26,12 @@ r:rand()    -- "6b492747cc620c40"
 
 # tip
 
-Because lua until 5.4 haven't support 64bit integer. lua_Integer is abort 2^63-1 range. And lua_Number is saved as float type.
+Because lua until 5.4 haven't support 64bit integer. lua_Integer is about 2^63-1 range. And lua_Number is saved as float type.
 
-I have consider to use like [LuaTinker](https://github.com/zupet/LuaTinker/blob/master/lua_tinker.cpp#L125) or [cloudwu lua-int64](https://github.com/cloudwu/lua-int64/blob/master/int64.c#L9) solution to deal with it. But all add more complexity to the lib, I finally give up.
+I have considered to use like [LuaTinker](https://github.com/zupet/LuaTinker/blob/master/lua_tinker.cpp#L125) or [cloudwu lua-int64](https://github.com/cloudwu/lua-int64/blob/master/int64.c#L9) solution to deal with it. But all add more complexity to the lib, I finally give up.
 
 I cast uint64_t to char bytes to pass from c to lua and convert the bytes to hexadecimal bytes string in lua code.
 
-The original bytes string can be convert to integer in either endian you choose, I put a example in the [test case](test.lua#L6).
+The original bytes string can be convert to integer in either endian you choose, I put an example in the [test case](test.lua#L6).
 
 If you want to do some compatible work with the other implementation, you can get the raw bytes string and change the representation yourself refer to my test example.
