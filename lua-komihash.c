@@ -3,16 +3,12 @@
 #include <lauxlib.h>
 #include "komihash/komihash.h"
 
-// 2^64 = 1844 67440737 09551616 + '\0'
-#define str_len 21
-static char str_ret[str_len];
-
 static int
 lhash64(lua_State *L) {
     size_t len;
     const char *str = luaL_checklstring(L, 1, &len);
-    snprintf(str_ret, str_len, "%"PRIu64, komihash(str, len, luaL_optinteger(L, 2, 0)));
-    lua_pushstring(L, str_ret);
+    uint64_t ret = komihash(str, len, luaL_optinteger(L, 2, 0));
+    lua_pushlstring(L, (const char *)&ret, sizeof(uint64_t));
     return 1;
 }
 
@@ -26,8 +22,8 @@ struct rand {
 static int
 lrand(lua_State *L) {
     struct rand *r = luaL_checkudata(L, 1, MT_NAME);
-    snprintf(str_ret, str_len, "%"PRIu64, komirand(&r->seed1, &r->seed2));
-    lua_pushstring(L, str_ret);
+    uint64_t ret = komirand(&r->seed1, &r->seed2);
+    lua_pushlstring(L, (const char *)&ret, sizeof(uint64_t));
     return 1;
 }
 

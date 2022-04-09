@@ -1,10 +1,16 @@
 local komihash = require("komihash")
 
-assert("5270236647356506095" == komihash.hash64("test1"))
-assert("11456916202224026228" == komihash.hash64("test2"))
+assert(komihash.hash64("test1") == "ef1feecf4ea42349")
+assert(komihash.hash64("test2") == "7402fba69524ff9e")
 
+local bytes_endian = {
+    { 1193757035, 1074553548 },
+    { 1049596507, 900294935 },
+    { 3919726509, 3678926522 },
+    { 3462861310, 2564880078 },
+}
 local r = komihash.new()
-assert("12297829382473034410" == r:rand())
-assert("18446744073709551614" == r:rand())
-assert("5270498306774157584" == r:rand())
-assert("13469051228422846976" == r:rand())
+for _, v in ipairs(bytes_endian) do
+    local a, b = string.unpack("<I4<I4", r:rand(true))
+    assert(a == v[1] and b == v[2])
+end
