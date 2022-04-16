@@ -1,4 +1,3 @@
-#include <inttypes.h>
 #include <lua.h>
 #include <lauxlib.h>
 #include "komihash/komihash.h"
